@@ -1,5 +1,7 @@
 import LocationSelect from '../location-select/LocationSelect';
 
+import styles from './LocationGroup.module.css';
+
 const LocationGroup = (props) => {
 
     const locationGroup = props.locationItems.map(item => {
@@ -15,7 +17,7 @@ const LocationGroup = (props) => {
     })
 
     return (
-        <div>
+        <div className={styles.LocationGroup}>
             {locationGroup}
         </div>
     );
