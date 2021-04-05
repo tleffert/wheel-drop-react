@@ -1,7 +1,7 @@
 import LocationGroup from '../../components/location-group/LocationGroup';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { selectLocation } from '../../store/actions'
+import { toggleLocation } from '../../store/actions'
 
 import styles from './LocationNav.module.css';
 
@@ -16,7 +16,7 @@ const LocationNav = (props) => {
         return stateLocations;
     });
 
-    const onLocationSelect = (id) => dispatch(selectLocation(id));
+    const onLocationSelect = (id) => dispatch(toggleLocation(id));
 
     return (
         <div className={styles.LocationNav}>

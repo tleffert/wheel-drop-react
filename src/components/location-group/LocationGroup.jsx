@@ -9,7 +9,7 @@ const LocationGroup = (props) => {
             <LocationSelect
                 locationName={item.location.name}
                 locationId={item.location.id}
-                select={item.selected}
+                selected={item.selected}
                 key={item.location.id}
                 click={props.onSelect}
             />

@@ -1,4 +1,4 @@
-import { SELECT_LOCATION, DESELECT_LOCATION} from '../actions/actionTypes';
+import { SELECT_LOCATION, DESELECT_LOCATION, TOGGLE_LOCATION} from '../actions/actionTypes';
 
 const initState = {
     'Lipovka':{
@@ -6,35 +6,35 @@ const initState = {
             name: 'Lipovka',
             id: 'Lipovka'
         },
-        selectd: false
+        selected: false
     },
     'Severny': {
         location :{
             name: 'Severny',
             id: 'Severny'
         },
-        selectd: false
+        selected: false
     },
     'Mylta': {
         location :{
             name: 'Mylta',
             id: 'Mylta'
         },
-        selectd: false
+        selected: false
     },
     'Primorsk': {
         location :{
             name: 'Primorsk',
             id: 'Primorsk'
         },
-        selectd: false
+        selected: false
     },
     'Zarky': {
         location :{
             name: 'Zarky',
             id: 'Zarky'
         },
-        selectd: false
+        selected: false
     }
 };
 
@@ -46,6 +46,16 @@ const locationReducer = (state = initState, action) => {
                 [action.payload.id]: {
                     ...state[action.payload.id],
                     selected: true
+                }
+            }
+        }
+
+        case TOGGLE_LOCATION: {
+            return {
+                ...state,
+                [action.payload.id]: {
+                    ...state[action.payload.id],
+                    selected: !state[action.payload.id].selected
                 }
             }
         }
