@@ -4,13 +4,13 @@ import styles from './LocationGroup.module.css';
 
 const LocationGroup = (props) => {
 
-    const locationGroup = props.locationItems.map(item => {
+    const locationGroup = props.locations.map(location => {
         return (
             <LocationSelect
-                locationName={item.location.name}
-                locationId={item.location.id}
-                selected={item.selected}
-                key={item.location.id}
+                locationName={location.text}
+                locationId={location.text}
+                selected={location.selected}
+                key={location.text}
                 click={props.onSelect}
             />
         );
