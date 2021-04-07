@@ -1,15 +1,16 @@
 
+
 import styles from './LocationSelect.module.scss';
 
-const LocationSelect = (props) => {
-
+const LocationSelect = ({selected, location, click}) => {
+    console.log("LocationSelect RENDER");
     return (
         <div className={styles.LocationSelect}>
             <button
-                className={`${props.selected ? styles.Active : '' }`}
-                onClick={() => props.click(props.location)}
+                className={`${selected ? styles.Active : '' }`}
+                onClick={() => click(location)}
             >
-                {props.location.text}
+                {location.text}
             </button>
         </div>
     );

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
@@ -48,7 +48,7 @@ const LocationNav = (props) => {
         setGroupLocations(locationGroups);
     }
 
-    const locationSelectHander = (location) => {
+    const locationSelectHander = useCallback((location) => {
         setGroupLocations(currentGroups => {
             let selectedLocation = currentGroups[location.level - 1][location.text];
             let updateGroup = {...currentGroups[location.level - 1]};
@@ -60,7 +60,7 @@ const LocationNav = (props) => {
             updatedGroups[location.level - 1] = {...updateGroup};
             return updatedGroups;
         });
-    }
+    });
 
     const mapSelection = maps.map(map => {
         return (
