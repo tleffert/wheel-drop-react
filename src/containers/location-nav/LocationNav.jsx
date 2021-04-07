@@ -12,7 +12,7 @@ const LocationNav = (props) => {
 
     const maps = ['Erangel', 'Miramar', 'Vikendi'];
     const [selectedMap, setSelectedMap] = useState('Erangel');
-    const [groups, setGroupLocations] = useState(Array(3).fill([]));
+    const [groups, setGroupLocations] = useState(Array(3).fill({}));
 
     const dispatch = useDispatch();
     const onLocationSelect = (id) => dispatch(toggleLocation(id));
@@ -25,11 +25,23 @@ const LocationNav = (props) => {
         })
     }, [selectedMap]);
 
+    useEffect(() => {
+        let selectedLocations = [];
+        groups.forEach(group => {
+            for(let [key, value] of Object.entries(group)) {
+                if (value.selected) {
+                    selectedLocations.push(value);
+                }
+            }
+        });
+        props.onSelectedUpdate(selectedLocations);
+    }, [groups]);
+
     const mapLocationsToGroups = (locations) => {
         // Takes the locations and organizes by 'level' of the location
-        const locationGroups = [[],[],[]];
+        const locationGroups = [{},{},{}];
         for(const [key, value] of Object.entries(locations)) {
-            locationGroups[value.level - 1].push(value);
+            locationGroups[value.level - 1][key] = value;
         }
         setGroupLocations(locationGroups);
     }
@@ -37,6 +49,20 @@ const LocationNav = (props) => {
     const mapSelectHanlder = (mapName) => {
         // set selected map, and update location selection
         setSelectedMap(mapName);
+    }
+
+    const locationSelectHander = (location) => {
+        setGroupLocations(currentGroups => {
+            let selectedLocation = currentGroups[location.level - 1][location.text];
+            let updateGroup = {...currentGroups[location.level - 1]};
+            updateGroup[location.text] = {
+                ...selectedLocation,
+                selected: !selectedLocation.selected
+            };
+            let updatedGroups = [...currentGroups];
+            updatedGroups[location.level - 1] = {...updateGroup};
+            return updatedGroups;
+        });
     }
 
     const mapSelection = maps.map(map => {
@@ -52,9 +78,9 @@ const LocationNav = (props) => {
     const locationGroups = groups.map((group, index) => {
         return (
             <LocationGroup
-                locations={group}
+                locations={Object.values(group)}
                 key={`group${index}`}
-                onSelect={(pick) => console.log("you picked me", pick)}
+                onSelect={(selectedLocation) => locationSelectHander(selectedLocation)}
             />
         );
     })

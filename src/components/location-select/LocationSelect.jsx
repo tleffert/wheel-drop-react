@@ -7,9 +7,9 @@ const LocationSelect = (props) => {
         <div className={styles.LocationSelect}>
             <button
                 className={`${props.selected ? styles.Active : '' }`}
-                onClick={() => props.click(props.locationId)}
+                onClick={() => props.click(props.location)}
             >
-                {props.locationName}
+                {props.location.text}
             </button>
         </div>
     );

@@ -12,6 +12,7 @@ const LocationGroup = (props) => {
                 selected={location.selected}
                 key={location.text}
                 click={props.onSelect}
+                location={location}
             />
         );
     })
