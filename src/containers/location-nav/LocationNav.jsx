@@ -18,6 +18,7 @@ const LocationNav = (props) => {
     const onLocationSelect = (id) => dispatch(toggleLocation(id));
     const onSetMapLocations = (locations) => dispatch(setMapLocations(locations))
 
+    // Fetches locations for the selected map
     useEffect(() => {
         axios.get(`https://wheel-drop-react-default-rtdb.firebaseio.com/locations.json?orderBy="map"&equalTo="${selectedMap}"`)
         .then(({data}) => {
@@ -27,6 +28,7 @@ const LocationNav = (props) => {
 
     useEffect(() => {
         let selectedLocations = [];
+        // Filtering down to flat array containing the selected locations
         groups.forEach(group => {
             for(let [key, value] of Object.entries(group)) {
                 if (value.selected) {
