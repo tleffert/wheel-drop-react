@@ -48,11 +48,6 @@ const LocationNav = (props) => {
         setGroupLocations(locationGroups);
     }
 
-    const mapSelectHanlder = (mapName) => {
-        // set selected map, and update location selection
-        setSelectedMap(mapName);
-    }
-
     const locationSelectHander = (location) => {
         setGroupLocations(currentGroups => {
             let selectedLocation = currentGroups[location.level - 1][location.text];
@@ -71,7 +66,7 @@ const LocationNav = (props) => {
         return (
             <MapSelect
                 mapName={map}
-                click={mapSelectHanlder}
+                click={setSelectedMap}
                 key={map}
             />
         );
