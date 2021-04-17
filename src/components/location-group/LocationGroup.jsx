@@ -20,7 +20,7 @@ const LocationGroup = ({locations, onSelect}) => {
     })
 
     return (
-        <div className={styles.LocationGroup}>
+        <div className="d-flex justify-content-center flex-wrap">
             {locationGroup}
         </div>
     );
@@ -35,10 +35,9 @@ const eqaul = (prevState, nextState) => {
     }
 
     prevLocs.forEach((loc, index) => {
-        // console.log(loc.text, index, nextLocs[index].text);
         groupIsEqual = groupIsEqual && (loc.text === nextLocs[index].text) && (loc.selected === nextLocs[index].selected);
     });
-    console.log("ARE THESE EQUAL", groupIsEqual);
+
     return groupIsEqual;
 }
 

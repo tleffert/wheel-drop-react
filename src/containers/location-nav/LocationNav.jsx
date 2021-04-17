@@ -74,11 +74,13 @@ const LocationNav = (props) => {
 
     const locationGroups = groups.map((group, index) => {
         return (
-            <LocationGroup
-                locations={Object.values(group)}
-                key={`group${index}`}
-                onSelect={(selectedLocation) => locationSelectHander(selectedLocation)}
-            />
+            <div className="col-4">
+                <LocationGroup
+                    locations={Object.values(group)}
+                    key={`group${index}`}
+                    onSelect={(selectedLocation) => locationSelectHander(selectedLocation)}
+                />
+            </div>
         );
     })
 
@@ -88,7 +90,11 @@ const LocationNav = (props) => {
                 {mapSelection}
             </div>
             {selectedMap}
-            {locationGroups}
+            <div className="container">
+                <div className="row">
+                    {locationGroups}
+                </div>
+            </div>
         </div>
     );
 }
